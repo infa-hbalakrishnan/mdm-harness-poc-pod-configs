@@ -1,0 +1,25 @@
+{
+  "callbackUrl": "https://mdmnext-qa-mrel1.infacloudops.net/org-provisioning/api/v1/licensechange",
+  "licenses": [
+    {
+      "application": "Reference 360",
+      "category": "",
+      "license": "Reference data management"
+    },
+    {
+      "application": "MDM Product 360",
+      "category": "",
+      "license": "MDM P360 Business Application"
+    },    
+    {
+      "application": "MDM Configuration",
+      "category": "",
+      "license": "MDM Domain Authoring and Configuration Core"
+    },
+    {
+      "application": "MDM Customer 360",
+      "category": "",
+      "license": "MDM C360 Business Application"
+    }
+  ]
+}

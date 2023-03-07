@@ -1,0 +1,171 @@
+---
+service:
+  javaToolOptions: "-javaagent:/elastic/apm/agent/elastic-apm-agent.jar -Dlog4j2.formatMsgNoLookups=true
+    -Dspring.cloud.discovery.client.composite-indicator.enabled=false -Dmanagement.health.consul.enabled=false"
+  apm:
+    enabled: true
+    server: https://apm-mdm.ext.qa.elk.cloudtrust.rocks
+  replicasScaleFactor: 1
+  replicas: 1
+  hpa: false
+  pdb: false
+  vault:
+    token_secret: false
+    role: qa-mdmcloud-mdmnext
+    prefix: kv/qa/mdmcloud/mdmnext/common
+data-manager:
+  hpa: false
+  pdb: false
+  replicas: 1
+  replicasScaleFactor: 1
+authorization:
+  hpa: false
+  pdb: false
+  replicas: 2
+  replicasScaleFactor: 1
+business-entity-batch:
+  hpa: false
+  pdb: false
+  replicas: 2
+  replicasScaleFactor: 1
+business-entity:
+  hpa: false
+  pdb: false
+  replicas: 2
+  replicasScaleFactor: 1
+org-provisioning:
+  hpa: false
+  pdb: false
+  replicas: 2
+  replicasScaleFactor: 1
+metadata:
+  hpa: false
+  pdb: false
+  replicas: 2
+  replicasScaleFactor: 1
+ingressController:
+  corsOrigins:
+  - https://qa-ma.mrel.infaqa.com
+  - https://qa-pod1.mrel.infaqa.com
+  - https://pod1.sfdc-cai.mrel.infaqa.com
+  - https://apim-pod1.mrel.infaqa.com
+  - https://cih-pod1.mrel.infaqa.com
+  - https://qa-common.mrel.infaqa.com
+  - https://qa-pod2.mrel.infaqa.com
+  - https://qa-content.mrel.infaqa.com
+  - https://pod1-cai.mrel.infaqa.com
+  - https://pod1-opsinsights.mrel.infaqa.com
+  - https://qa-pod1-mdm.mrel.infaqa.com
+  - https://dq-qa-pod1.mrel.infaqa.com
+  - https://dqprofile-qa-pod1.mrel.infaqa.com
+  - https://qa-pod1-ing.mrel.infaqa.com
+  - https://pod1-extopsinsights.mrel.infaqa.com
+  - https://devprod-app.hawk.mrel.infaqa.com
+mdm:
+  preview:
+    enabled: true
+  efs:
+    population:
+      enabled: true
+    vpcId: vpc-0db1e1edc0a5fc444
+    file_system_id: fs-0c3fc79a08288ef1c
+    region: us-west-2
+    SourceSecurityGroup: sg-07ded4ecfeb434de2
+    subnets: subnet-0b9e144b558b70271 subnet-0f80552fc1d3a1941 subnet-05e53a0c85b53b1f7
+  nodeSelector:
+    lifecycle: Ec2Spot
+  tolerations:
+  - key: mdmnext
+    operator: Equal
+    value: spark
+    effect: NoSchedule
+  applicationEnv: QA
+  namespace:
+    system: mdmnext-qa-mrel1
+  expiry: '2021-12-31'
+  budgetPod: aws-mrel-pod1
+  ownerEmail: DLMDMARCUS@INFORMATICA.COM
+  expiryEmail: NP_BUDGET_MDMN@informatica.com
+spark:
+  efs:
+    enabled: true
+  nodeSelector:
+    lifecycle: Ec2Spot
+  tolerations:
+  - key: mdmnext
+    operator: Equal
+    value: spark
+    effect: NoSchedule
+  vault:
+    role: qa-mdmcloud-mdmnext
+    token_secret: false
+telegraf:
+  aws_buffers_monitoring:
+    enabled: false
+    asgs: []
+loadbalancer:
+  securityGroups: sg-016519f2f2aa1fe8c
+  external:
+    public: false
+    private: true
+monitoring:
+  cloudtrust:
+    prometheus:
+      enabled: false
+  alertTeam: ''
+  alertTeamEmail: dlmdmarcus@informatica.com
+  sparkNamespace: mdmnext-qa-mrel1ci3spark
+  thanosVersion: v0.6.0
+  thanosBucketName: ct-prometheus-thanos-qa
+  mongodbatlas:
+    snapshots: false
+  replicas:
+    alertmanager: 1
+    prometheus: 1
+  kubernetes:
+    deployments:
+      enabled: false
+elasticsearch:
+  nodeNameSuffix: ci3
+  storageClassName: mdm-es-data-expandable-gp3
+  es_shard_allocation: 5000
+  es_additional_replicas: 0
+  zones:
+  - a
+  es_number_of_shards: 1
+  k8s: true
+  region: us-west-2
+  monitoring:
+    enabled: true
+  backups:
+    color: blue
+    cron: false
+    enabled: false
+    primaryRegion: us-west-2
+    drRegion: us-east-1
+  master:
+    replicas: 1
+    javaOpts: "-Xms2g -Xmx2g -Dlog4j2.formatMsgNoLookups=true"
+    resources:
+      memReq: 4Gi
+      memLimit: 4Gi
+      cpuReq: '2'
+      cpuLimit: '2'
+      volumeSize: 10Gi
+  data:
+    replicas: 1
+    javaOpts: "-Xms2g -Xmx2g -Dlog4j2.formatMsgNoLookups=true"
+    resources:
+      memReq: 4Gi
+      memLimit: 4Gi
+      cpuReq: '2'
+      cpuLimit: '2'
+      volumeSize: 50Gi
+  templates:
+  - orgId: hONbfijtQy3dD36SXGbGa4
+    shards: 3
+  - orgId: 2RFGojIb8OPbXMNMIEI4Og
+    shards: 2
+certmanager:
+  version: latest
+

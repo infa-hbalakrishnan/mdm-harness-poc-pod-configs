@@ -1,0 +1,17 @@
+mdm:
+  url:
+    external: "tcp://qa-pod1-mdm.mrel.infaqa.com:443"
+    internal: "tcp://mdmnext-qa-mrel1.infacloudops.net:443"
+cai:
+  url: "https://pod1-cai.mrel.infaqa.com"
+dq:
+  url: "https://dq-qa-pod1.mrel.infaqa.com"
+dis:
+  url: "https://disn-qa-mrel-int-elb.infacloudops.net"
+atlas:
+  monitoring:
+    enabled: true
+    snaphsots: false
+mongodb:
+  monitoring:
+    enabled: true
