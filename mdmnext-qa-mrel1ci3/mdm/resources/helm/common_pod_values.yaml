@@ -168,4 +168,6 @@ elasticsearch:
     shards: 2
 certmanager:
   version: latest
-
+ingress:
+  domain: "mdm-shrd-eks-qa.usw2.cloudtrust.rocks"
+  subDomain: "mdmn-qa-mrel1ci3"
